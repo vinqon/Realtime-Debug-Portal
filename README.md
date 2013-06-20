@@ -24,10 +24,8 @@ RDP是一个类似Web Inspector的工具，把这个工具引入我们的项目�
 
 然后在合适位置调用以下代码：
 
-`#import "libRDP.h"
-
-[RDP startServer];
-`
+	#import "libRDP.h"
+	[RDP startServer];
 
 启动应用之后，状态栏会显示出你需要访问的地址，模拟器一般会显示http://127.0.0.1:8080，请使用Chrome或者Safari打开。
 
