@@ -13,7 +13,9 @@ RDP是一个类似Web Inspector的工具，把这个工具引入我们的项目�
 
 #### Usage
 
-把库文件、头文件以及资源文件(bundle)引入项目即可，需要注意的是要到工程中的Build Settings中把Other Linker Flags设置为-ObjC。
+把库文件、头文件以及资源文件(bundle)引入项目即可，有两点需要注意一下：
+1.	把工程中的Build Settings中的Other Linker Flags设置为-ObjC;
+2.	使用iOS5或以上SDK;
 
 然后在合适位置调用以下代码：
 
