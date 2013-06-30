@@ -1,13 +1,18 @@
-define("index",["jquery","tmpl"],function(require,exports,module){
+define("index",["jquery","tmpl","request"],function(require,exports,module){
 
-	var tmpl = require("tmpl");
+	var tmpl 			= require("tmpl");
+	var request 		= require("request");
 	var expandedAddress = {};
-	var lastUpdate = -1;
+	var lastUpdate 		= -1;
 	var selectedAddress = null;
+
+	var systemInfoList 	= [];
 
 	var refreshViewTree = function(cb){
 
+		var jqxhr = 
 		$.get("/api/loadViewTree",{"lastupdate":lastUpdate},function(data){
+
 			var data = JSON.parse(data).data;
 			var json = null;
 
@@ -53,18 +58,24 @@ define("index",["jquery","tmpl"],function(require,exports,module){
 				$("li.viewnode[address="+address+"]").addClass("expanded");
 			}
 		});
+
+		jqxhr.done(function() {
+			refreshViewTree();
+		}).fail(function() {
+			setTimeout(refreshViewTree,10000);
+		});
 	};
 
 	var viewObj2HTML = function(view){
-		var HTML = tmpl("<li class=viewnode address=<%=view.address%> frame=<%=view.x%>|<%=view.y%>|<%=view.w%>|<%=view.h%>>"+
+		var HTML = tmpl("<li class=viewnode address=<%=view.address%> <%=view.frame?('frame=\"'+view.frame+'\"'):''%> <%=view.hidden != undefined?('ishidden=\"'+view.hidden*1+'\"'):''%>>"+
 							"<%if(view.subviews && view.subviews.length>0){%><a class=arrow></a><%}%>"+
 							"<a class=viewinfo href=javascript:void(0)>&lt;"+
-								"<span class=h1><%=view.class%></span>&nbsp;"+
-								"<span class=h2>frame</span>=<span class=h3>&quot;(<%=view.x%>,<%=view.y%>,<%=view.w%>,<%=view.h%>)&quot;</span>&nbsp;"+
-								"<span class=h2>bounds</span>=<span class=h3>&quot;(<%=view.bx%>,<%=view.by%>,<%=view.bw%>,<%=view.bh%>)&quot;</span>&nbsp;"+
-								"<span class=h2>hidden</span>=<span class=h3>&quot;<%=view.hidden?'YES':'NO'%>&quot;</span>&nbsp;"+
-								"<span class=h2>address</span>=<span class=h3>&quot;<%=view.address%>&quot;</span>&gt;"+
-							"</a>"+
+								"<span class=h1><%=view.className%></span>&nbsp;"+
+								"<%=view.frame?('<span class=h2>frame</span>=<span class=h3>&quot;'+view.frame+'&quot;</span>&nbsp;'):''%>"+
+								"<%=view.bounds?('<span class=h2>bounds</span>=<span class=h3>&quot;'+view.bounds+'&quot;</span>&nbsp;'):''%>"+
+								"<span class=h2>hidden</span>=<span class=h3>&quot;<%=view.hidden?'YES':'NO'%>&quot;</span>"+
+								"<%for(var key in view){if(key=='subviews'||key=='address'||key=='className'||key=='frame'||key=='bounds'||key=='hidden')continue;print('&nbsp;<span class=h2>'+key+'</span>=<span class=h3>&quot;'+view[key]+'&quot;</span>')}%>"+
+							"&gt;</a>"+
 						"</li>",{view:view});
 		if(view.subviews){
 			HTML += "<ol>";
@@ -77,139 +88,221 @@ define("index",["jquery","tmpl"],function(require,exports,module){
 
 	};
 
+
+	var $memVal 		= $("#memoryvalue");
+	var $cpuVal 		= $("#cpuvalue");
+	var $memoryTimeLine = $("#memorytimeline");
+	var $cpuTimeLine	= $("#cputimeline");
+	var $logContent		= $("#logContent");
+
+	var refreshSystemInfo = function(cb){
+
+		var maxHeight 	= 100;
+		var heightRate 	= 0.9;
+		var blockWidth 	= 4;
+		var blockMargin = 0;
+		var blockCount 	= 10;
+
+		var minMem,maxMem,minCPU,maxCPU;
+
+		if (systemInfoList.length > 0) {
+
+			minMem = maxMem = systemInfoList[0].memory;
+			minCPU = maxCPU = systemInfoList[0].cpu;
+
+			for(var i = 0; i<systemInfoList.length;i++){
+				if(minMem > systemInfoList[i].memory) minMem = systemInfoList[i].memory;
+				if(maxMem < systemInfoList[i].memory) maxMem = systemInfoList[i].memory;
+				if(minCPU > systemInfoList[i].cpu) minCPU = systemInfoList[i].cpu;
+				if(maxCPU < systemInfoList[i].cpu) maxCPU = systemInfoList[i].cpu;
+			}
+		};
+
+		var memRate 	= maxHeight * heightRate / (maxMem - minMem);
+		var cpuRate 	= maxHeight * heightRate / (maxCPU - minCPU);
+		var baseHeight 	= maxHeight * (1 - heightRate) / 2;
+
+		$memoryTimeLine.empty();
+		$cpuTimeLine.empty();
+
+		for(var i = 0; i<systemInfoList.length;i++){
+
+			var l = (blockMargin + blockWidth) * i;
+			var memh = (systemInfoList[i].memory - minMem) * memRate + baseHeight;
+			var cpuh = (systemInfoList[i].cpu - minCPU) * cpuRate + baseHeight;
+
+			$("<div/>").addClass("momentblock")
+					.css({"left":l+"px","height":memh+"px","width":blockWidth+"px"})
+					.appendTo($memoryTimeLine);
+
+			$("<div/>").addClass("momentblock")
+					.css({"left":l+"px","height":cpuh+"px","width":blockWidth+"px"})
+					.appendTo($cpuTimeLine);
+		}
+	};
+
+
 	var loadLog = function(cb){
 
-		$.get("/api/loadLog",function(data){
-			var data = JSON.parse(data).data;
-			var json = null;
+		$.get("/api/loadLog",function(d){
+
+			var data = JSON.parse(d).data;
+			var content = data.content;
 
 			if (data.code == 404) return;
 			
-			json = data.content;
+			for(var i = 0; i < content.length; i++){
 
-			if (json && json.length > 0 ) {
-              
-				console && console.log && console.log(json);
-              
-				container  = $("#console article")[0];
-				container.innerHTML += log2HTML(json);
-				container.scrollTop = container.scrollHeight;
-              
+				var item = content[i];
+
+				if (item.type == "userlog") {
+
+					var date = new Date();
+					date.setTime(date);
+					var timeStr = date.toTimeString().split(" ")[0];
+
+					var $item = $("<div class='cell'><span class='time'>"+timeStr+"</span></div>").appendTo($logContent);
+
+					$("<span/>").text(item.content).appendTo($item);
+
+					$logContent[0].scrollTop = $logContent[0].scrollHeight;
+
+				}
+
+				if (item.type == "systeminfo") {
+
+					systemInfoList.push(item);
+
+					$memVal.html((item.memory).toFixed(1)+"MB");
+					$cpuVal.html((item.cpu).toFixed(1)+"%");
+
+					if (systemInfoList.length > 3) {
+
+						if (systemInfoList.length > 50) {
+
+							systemInfoList = systemInfoList.slice(systemInfoList.length - 50);
+						};
+
+						refreshSystemInfo();
+
+					};
+
+				};
+
 			};
 
-			cb && cb();
 
+		}).done(function() {
+			loadLog();
+		}).fail(function() {
+			setTimeout(loadLog,10000);
 		});
 	}
-
-	var log2HTML = function(list){
-		var HTML = tmpl("<%for(var i = 0;i<list.length;i++){%>"+
-				"<%if(list[i].content&&list[i].content.length>0){%><div><%=list[i].content%></div><%}%>"+
-			"<%}%>",{list:list});
-
-		return HTML;
-	};
 
 	$(function(){
 
 		refreshViewTree();
+		loadLog();
 
-		var shifting = false;
-		var widthsetting = false;
+		var shifting 	= false;
+		var sPressing 	= false;
+
 		window.onkeyup = function(e){
+
 			if(e.keyCode == 16){
 				shifting = false;
 			}
+
 			if(e.keyCode == 87){
-				widthsetting = false;
+				sPressing = false;
 			}
 		};
 
 		window.onkeydown = function(e){
+
 			if(e.keyCode == 16){
+
 				shifting = true;
 				return;
 			}
 
 			if(e.keyCode == 87){
-				widthsetting = true;
+
+				sPressing = true;
 				return;
 			}
 
-			if((e.keyCode >= 37 && e.keyCode <=40)||e.keyCode == 72){
+			if((e.keyCode >= 37 && e.keyCode <= 40) || e.keyCode == 72){
 
 				var selectedView = $("li.viewnode.selected");
 				if (!selectedView.length) return;
 
 				e.preventDefault();
 
-				var frame = selectedView.attr("frame").split("|");
-				var x = frame[0]*1;
-				var y = frame[1]*1;
-				var w = frame[2]*1;
-				var h = frame[3]*1;
-				var sethidden = false;
-
 				var offset = 1;
 				if (shifting) offset = 10;
 
-				if (widthsetting) {
-					if (e.keyCode == 37) {//left
-						w -= offset;
-					}else if(e.keyCode == 38){//up
-						h -= offset;
-					}else if(e.keyCode == 39){//right
-						w += offset;
-					}else if(e.keyCode == 40){//down
-						h += offset;
-					}
+				var frame 			= selectedView.attr("frame").replace(/[{}]/g,"").replace(" ","").split(",");
+				var x 				= frame[0] * 1;
+				var y 				= frame[1] * 1;
+				var w 				= frame[2] * 1;
+				var h 				= frame[3] * 1;
+				var hidden 			= selectedView.attr("ishidden") * 1;
+
+				if (sPressing) {
+
+					if (e.keyCode == 37)		w -= offset; 
+					else if(e.keyCode == 38)	h -= offset;
+					else if(e.keyCode == 39)	w += offset;
+					else if(e.keyCode == 40)	h += offset;
+					
 				}else{
-					if (e.keyCode == 37) {//left
-						x -= offset;
-					}else if(e.keyCode == 38){//up
-						y -= offset;
-					}else if(e.keyCode == 39){//right
-						x += offset;
-					}else if(e.keyCode == 40){//down
-						y += offset;
-					}
+
+					if (e.keyCode == 37)		x -= offset;
+					else if(e.keyCode == 38)	y -= offset;
+					else if(e.keyCode == 39)	x += offset;
+					else if(e.keyCode == 40)	y += offset;
 				}
 
-				if (e.keyCode==72) {
+				if (e.keyCode==72) 				hidden = !hidden;
 
-					sethidden = true;
-				};
+				var info 			= {};
+				info.frame 	= "{{" + x + "," + y + "},{" + w + "," + h + "}}";
+				info.hidden	= hidden;
 
-				selectedView.attr("frame",(x+"|"+y+"|"+w+"|"+h));
+				var params 			= {};
+				params.address 		= selectedView.attr("address");
+				params.info 		= JSON.stringify(info);
 
-				$.get("/api/moveView",{address:selectedView.attr("address"),x:x,y:y,w:w,h:h,hidden:sethidden},function(){
-					window.needToRefresh = true;
-				});
+
+				request("/api/moveView",params,function(){
+
+				 	window.needToRefresh = true;
+
+				 });
+
+				selectedView.attr("frame",info.frame);
+				selectedView.attr("ishidden",info.hidden * 1)
+
+				// $.get("/api/moveView",{address:selectedView.attr("address"),x:x,y:y,w:w,h:h,hidden:sethidden},function(){
+				// 	window.needToRefresh = true;
+				// });
 
 				return false;
 			}
 		};
 
 
-		setInterval(function(){
-			if (window.needToRefresh){
-				refreshViewTree();
-				window.needToRefresh = false;
-			}
-		},1000);
+		// setInterval(function(){
+		// 	if (window.needToRefresh){
+		// 		refreshViewTree();
+		// 		window.needToRefresh = false;
+		// 	}
+		// },1000);
 
-		setInterval(function(){
-			window.needToRefresh = true;
-		},1500);
-
-
-		var keepLoadLog = function(){
-			loadLog(function(){
-				setTimeout(keepLoadLog,500);
-			});
-		};
-
-		keepLoadLog();
+		// setInterval(function(){
+		// 	window.needToRefresh = true;
+		// },1500);
 		
 	});
 
