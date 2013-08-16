@@ -14,8 +14,6 @@ RDP是一个类似Web Inspector的工具，把这个工具引入我们的项目�
 
 更多详细的信息，可以参考这篇博文[《Redesign Your App for iOS 7 之 页面布局》](http://www.vinqon.com/codeblog/?detail/11109 "Redesign Your App for iOS 7 之 页面布局") 
 
-由于最近较忙，先把framework打包放上来，项目代码还需要一些时间整理。
-
 
 
 ### Usage
@@ -46,12 +44,9 @@ RDP是一个类似Web Inspector的工具，把这个工具引入我们的项目�
 1.	优化页面样式
 2.	前端代码拿到github中，跨域访问
 
-###### Project
-1.	整理代码，写Sample
-2.	写文档
-3.	开源代码
-	
+
+
 
 ### ISSUE
-1.	读取View信息的时候偶然会发生crash，可能View读取期间被释放了
+1.	读取View信息的时候偶然会发生crash，可能View读取期间被释放了（知道了还不去fix？！！我是懒到到什么程度了）
 2.	轮询的办法来同步View结构信息好拙啊，分别用Runloop和线程来实现了一下Comet，不过1).自己开一个Runloop好像特别耗性能，而2).线程等待的时候会阻塞其他请求；还是不纠结这些了，下期用WebSoket来弄，开源库都已经找好了。
