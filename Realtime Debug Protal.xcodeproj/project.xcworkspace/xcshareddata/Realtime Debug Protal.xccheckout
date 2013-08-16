@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>DA331C6C-FA82-48A6-A869-EE20186E7D97</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Realtime Debug Protal</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3C59710B-F208-4073-A778-14226681F6B0</key>
+		<string>https://github.com/swisspol/GCDWebServer.git</string>
+		<key>4F041EFE-AB6A-43A9-999D-CC89870F6F92</key>
+		<string>https://svn.baidu.com/app/search/ns-mobile/trunk/bwxuikit-ios</string>
+		<key>7178F6F4-8EBD-4760-B6D3-EC8E21B9269E</key>
+		<string>https://svn.baidu.com/app/search/ns-mobile/trunk/iphone-traffic/BaiduTraffic/3rdLibrary/JSONKit</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Realtime Debug Protal/Realtime Debug Protal.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3C59710B-F208-4073-A778-14226681F6B0</key>
+		<string>../../../github/GCDWebServer</string>
+		<key>4F041EFE-AB6A-43A9-999D-CC89870F6F92</key>
+		<string>../../..</string>
+		<key>7178F6F4-8EBD-4760-B6D3-EC8E21B9269E</key>
+		<string>../../Realtime Debug Protal/JSONKit</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>4F041EFE-AB6A-43A9-999D-CC89870F6F92</key>
+		<string>https://svn.baidu.com/app/search/ns-mobile</string>
+		<key>7178F6F4-8EBD-4760-B6D3-EC8E21B9269E</key>
+		<string>https://svn.baidu.com/app/search/ns-mobile</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://svn.baidu.com/app/search/ns-mobile/trunk/bwxuikit-ios/Realtime%20Debug%20Protal/Realtime%20Debug%20Protal.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>4F041EFE-AB6A-43A9-999D-CC89870F6F92</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryBranchesRelativeLocationKey</key>
+			<string>branches</string>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlRepositoryTagsRelativeLocationKey</key>
+			<string>tags</string>
+			<key>IDESourceControlRepositoryTrunkRelativeLocationKey</key>
+			<string>trunk</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4F041EFE-AB6A-43A9-999D-CC89870F6F92</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Projects</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3C59710B-F208-4073-A778-14226681F6B0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GCDWebServer</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryBranchesRelativeLocationKey</key>
+			<string>branches</string>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlRepositoryTagsRelativeLocationKey</key>
+			<string>tags</string>
+			<key>IDESourceControlRepositoryTrunkRelativeLocationKey</key>
+			<string>trunk</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7178F6F4-8EBD-4760-B6D3-EC8E21B9269E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>JSONKit</string>
+		</dict>
+	</array>
+</dict>
+</plist>
