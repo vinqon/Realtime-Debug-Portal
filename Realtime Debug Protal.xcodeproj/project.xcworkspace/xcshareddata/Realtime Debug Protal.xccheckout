@@ -10,22 +10,26 @@
 	<string>Realtime Debug Protal</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>4C7F66C99B2838EE06CBA5311300D6488CF36F98</key>
+		<string>https://github.com/Ju2ender/Realtime-Debug-Portal.git</string>
 		<key>EF8B3BB2-BC07-41B5-9573-CDD14960F510</key>
 		<string>https://github.com/vinqon/Realtime-Debug-Portal.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Realtime Debug Protal.xcodeproj/project.xcworkspace</string>
+	<string>Realtime Debug Protal.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>EF8B3BB2-BC07-41B5-9573-CDD14960F510</key>
+		<key>4C7F66C99B2838EE06CBA5311300D6488CF36F98</key>
 		<string>../..</string>
+		<key>EF8B3BB2-BC07-41B5-9573-CDD14960F510</key>
+		<string>../../../RDP@github</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/vinqon/Realtime-Debug-Portal.git</string>
+	<string>https://github.com/Ju2ender/Realtime-Debug-Portal.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>EF8B3BB2-BC07-41B5-9573-CDD14960F510</string>
+	<string>4C7F66C99B2838EE06CBA5311300D6488CF36F98</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>EF8B3BB2-BC07-41B5-9573-CDD14960F510</string>
 			<key>IDESourceControlWCCName</key>
 			<string>RDP@github</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4C7F66C99B2838EE06CBA5311300D6488CF36F98</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Realtime-Debug-Portal</string>
 		</dict>
 	</array>
 </dict>

@@ -22,7 +22,7 @@
  */
 
 #import "MethodSwizzle.h"
-#import </usr/include/objc/objc-class.h>
+#import <objc/runtime.h>
 
 void MethodSwizzle(Class aClass, SEL orig_sel, SEL alt_sel)
 {

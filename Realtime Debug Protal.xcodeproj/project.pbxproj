@@ -122,6 +122,7 @@
 		678BE51716F841E7006EED6B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		678BE51816F841E7006EED6B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		678BE51B16F841E7006EED6B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		A61F0F3319D401A700CAAA96 /* libRDP-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "libRDP-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +164,7 @@
 				1354909C17BBA1BB0047E664 /* WebService */,
 				1354909D17BBA1D60047E664 /* Resources */,
 				1354909E17BBA1E50047E664 /* Utils */,
+				A61F0F3319D401A700CAAA96 /* libRDP-Prefix.pch */,
 			);
 			path = libRDP;
 			sourceTree = "<group>";
@@ -444,7 +446,7 @@
 			buildSettings = {
 				DSTROOT = /tmp/libRDP.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "libRDP/libRDP-Prefix.pch";
+				GCC_PREFIX_HEADER = "Realtime Debug Protal/libRDP/libRDP-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -456,7 +458,7 @@
 			buildSettings = {
 				DSTROOT = /tmp/libRDP.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "libRDP/libRDP-Prefix.pch";
+				GCC_PREFIX_HEADER = "Realtime Debug Protal/libRDP/libRDP-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
