@@ -21,7 +21,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    UIButton *btn = [[[UIButton alloc]initWithFrame:CGRectMake(10,20, 200, 50)]autorelease];
+    UIButton *btn = [[[UIButton alloc]initWithFrame:CGRectMake(10, 80, 400, 50)]autorelease];
     [btn setTitle:[@(self.navigationController.viewControllers.count) description] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
     btn.backgroundColor = [UIColor redColor];
