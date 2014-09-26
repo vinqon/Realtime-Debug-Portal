@@ -21,6 +21,5 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
 void MethodSwizzle(Class aClass, SEL orig_sel, SEL alt_sel);
 void MethodSwizzleClass(Class aClass, SEL orig_sel, SEL alt_sel);

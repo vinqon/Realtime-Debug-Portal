@@ -12,8 +12,7 @@
 
 @implementation RDP
 
-+ (RDPWebServer *)sharedWebServer
-{
++ (RDPWebServer *)sharedWebServer {
     static dispatch_once_t onceToken;
     static RDPWebServer *_sharedWebServer;
     
@@ -27,20 +26,17 @@
 }
 
 // start the server and the return value indicates whether it runs successfully or not.
-+ (BOOL)startServer
-{
++ (BOOL)startServer {
     return [[self sharedWebServer]start];
 }
 
 // stop the server
-+ (void)stopServer
-{
++ (void)stopServer {
     return [[self sharedWebServer]stop];
 }
 
 // log
-+ (void)logWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2)
-{
++ (void)logWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2) {
     va_list args;
     va_start(args,format);
     
