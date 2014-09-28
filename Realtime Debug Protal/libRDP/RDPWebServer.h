@@ -10,8 +10,14 @@
 
 @interface RDPWebServer : GCDWebServer
 
+/**
+ * 启动 RDP WebServer
+ */
 - (BOOL)start;
 
+/**
+ * 停止 RDP WebServer
+ */
 - (void)stop;
 
 @end

@@ -65,9 +65,9 @@
     return self;
 }
 
-- (NSDictionary *)parseRequest:(GCDWebServerRequest *)request error:(NSError **)error
-{
+- (NSDictionary *)parseRequest:(GCDWebServerRequest *)request error:(NSError **)error {
     NSString *service = request.URL.lastPathComponent;
+    
     if (service == nil) {
         *error = [NSError errorWithDomain:NSCocoaErrorDomain code:100 userInfo:@{@"message":@"serivce cannot be empty."}];
         return nil;
@@ -76,12 +76,14 @@
     NSString *controllerClassName = [service stringByAppendingString:@"Controller"];
     
     Class clazz = NSClassFromString(controllerClassName);
+    
     if (clazz == nil) {
         *error = [NSError errorWithDomain:NSCocoaErrorDomain code:101 userInfo:@{@"message":@"serivce can not be found."}];
         return nil;
     }
     
     id controller = [[[clazz alloc]init]autorelease];
+    
     if (![controller respondsToSelector:@selector(handleRequest:)]) {
         *error = [NSError errorWithDomain:NSCocoaErrorDomain code:102 userInfo:@{@"message":@"serivce is not available."}];
         return nil;
@@ -135,6 +137,10 @@
     }
     
     return [super start];
+}
+
+- (void)stop {
+    [super stop];
 }
 
 @end
