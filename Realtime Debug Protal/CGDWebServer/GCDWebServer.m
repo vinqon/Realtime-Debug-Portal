@@ -207,13 +207,16 @@ static void _SocketCallBack(CFSocketRef socket, CFSocketCallBackType type, CFDat
       
       if (name) {
         _service = CFNetServiceCreate(kCFAllocatorDefault, CFSTR("local."), CFSTR("_http._tcp"), (CFStringRef)name, port);
+          
         if (_service) {
           CFNetServiceClientContext context = {0, self, NULL, NULL, NULL};
           CFNetServiceSetClient(_service, _NetServiceClientCallBack, &context);
           CFNetServiceScheduleWithRunLoop(_service, [runloop getCFRunLoop], kCFRunLoopCommonModes);
           CFStreamError error = {0};
           CFNetServiceRegisterWithOptions(_service, 0, &error);
-        } else {
+            NSLog(@"server alive");
+        }
+        else {
           LOG_ERROR(@"Failed creating CFNetService");
         }
       }

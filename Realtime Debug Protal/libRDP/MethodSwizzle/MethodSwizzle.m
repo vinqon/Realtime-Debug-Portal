@@ -22,10 +22,9 @@
  */
 
 #import "MethodSwizzle.h"
-#import </usr/include/objc/objc-class.h>
+#import <objc/runtime.h>
 
-void MethodSwizzle(Class aClass, SEL orig_sel, SEL alt_sel)
-{
+void MethodSwizzle(Class aClass, SEL orig_sel, SEL alt_sel) {
     Method orig_method = nil, alt_method = nil;
   
     // First, look for the methods
@@ -38,8 +37,7 @@ void MethodSwizzle(Class aClass, SEL orig_sel, SEL alt_sel)
 	}
 }
 
-void MethodSwizzleClass(Class aClass, SEL orig_sel, SEL alt_sel)
-{
+void MethodSwizzleClass(Class aClass, SEL orig_sel, SEL alt_sel) {
     Method orig_method = nil, alt_method = nil;
 	
     // First, look for the methods

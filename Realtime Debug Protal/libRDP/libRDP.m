@@ -12,35 +12,31 @@
 
 @implementation RDP
 
-+ (RDPWebServer *)sharedWebServer
-{
++ (RDPWebServer *)sharedWebServer {
+    
+    // TODO: dispatch 意味派遣，派遣一次？什么意思？
     static dispatch_once_t onceToken;
     static RDPWebServer *_sharedWebServer;
     
     dispatch_once(&onceToken, ^{
-        
-        _sharedWebServer = [[RDPWebServer alloc]init];
-        
+        _sharedWebServer = [[RDPWebServer alloc] init];
     });
     
     return _sharedWebServer;
 }
 
 // start the server and the return value indicates whether it runs successfully or not.
-+ (BOOL)startServer
-{
-    return [[self sharedWebServer]start];
++ (BOOL)startServer {
+    return [[self sharedWebServer] start];
 }
 
 // stop the server
-+ (void)stopServer
-{
-    return [[self sharedWebServer]stop];
++ (void)stopServer {
+    return [[self sharedWebServer] stop];
 }
 
 // log
-+ (void)logWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2)
-{
++ (void)logWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2) {
     va_list args;
     va_start(args,format);
     

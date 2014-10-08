@@ -31,7 +31,6 @@
 		673C25FE16F9B58B002BFBA1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 673C25FD16F9B58B002BFBA1 /* CFNetwork.framework */; };
 		673C260216F9B5C7002BFBA1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 673C260116F9B5C7002BFBA1 /* MobileCoreServices.framework */; };
 		6756D9D31771A65D0037F28D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678BE51816F841E7006EED6B /* ViewController.m */; };
-		6756D9D41771A6B60037F28D /* liblibRDP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6719F38717717D7100DD1DD2 /* liblibRDP.a */; };
 		678BE50016F841E7006EED6B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 678BE4FF16F841E7006EED6B /* UIKit.framework */; };
 		678BE50216F841E7006EED6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 678BE50116F841E7006EED6B /* Foundation.framework */; };
 		678BE50416F841E7006EED6B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 678BE50316F841E7006EED6B /* CoreGraphics.framework */; };
@@ -42,6 +41,7 @@
 		678BE51416F841E7006EED6B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 678BE51316F841E7006EED6B /* Default@2x.png */; };
 		678BE51616F841E7006EED6B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 678BE51516F841E7006EED6B /* Default-568h@2x.png */; };
 		678BE51C16F841E7006EED6B /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 678BE51A16F841E7006EED6B /* ViewController.xib */; };
+		A61F0F3519D40A3600CAAA96 /* liblibRDP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A61F0F3419D40A3600CAAA96 /* liblibRDP.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +122,8 @@
 		678BE51716F841E7006EED6B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		678BE51816F841E7006EED6B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		678BE51B16F841E7006EED6B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		A61F0F3319D401A700CAAA96 /* libRDP-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "libRDP-Prefix.pch"; sourceTree = "<group>"; };
+		A61F0F3419D40A3600CAAA96 /* liblibRDP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibRDP.a; path = "../../Library/Developer/Xcode/DerivedData/Realtime_Debug_Protal-azclrpmxmylddcddkgqqlwlxxgcg/Build/Products/Debug-iphonesimulator/liblibRDP.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6756D9D41771A6B60037F28D /* liblibRDP.a in Frameworks */,
+				A61F0F3519D40A3600CAAA96 /* liblibRDP.a in Frameworks */,
 				673C260216F9B5C7002BFBA1 /* MobileCoreServices.framework in Frameworks */,
 				673C25FE16F9B58B002BFBA1 /* CFNetwork.framework in Frameworks */,
 				678BE50016F841E7006EED6B /* UIKit.framework in Frameworks */,
@@ -163,6 +165,7 @@
 				1354909C17BBA1BB0047E664 /* WebService */,
 				1354909D17BBA1D60047E664 /* Resources */,
 				1354909E17BBA1E50047E664 /* Utils */,
+				A61F0F3319D401A700CAAA96 /* libRDP-Prefix.pch */,
 			);
 			path = libRDP;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 		678BE4FE16F841E7006EED6B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A61F0F3419D40A3600CAAA96 /* liblibRDP.a */,
 				678BAF59170499B400B99A58 /* libc++.dylib */,
 				673C260116F9B5C7002BFBA1 /* MobileCoreServices.framework */,
 				673C25FF16F9B5B4002BFBA1 /* CoreMotion.framework */,
@@ -444,7 +448,7 @@
 			buildSettings = {
 				DSTROOT = /tmp/libRDP.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "libRDP/libRDP-Prefix.pch";
+				GCC_PREFIX_HEADER = "Realtime Debug Protal/libRDP/libRDP-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -456,7 +460,7 @@
 			buildSettings = {
 				DSTROOT = /tmp/libRDP.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "libRDP/libRDP-Prefix.pch";
+				GCC_PREFIX_HEADER = "Realtime Debug Protal/libRDP/libRDP-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -523,9 +527,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Realtime Debug Protal/Realtime Debug Protal-Prefix.pch";
 				INFOPLIST_FILE = "Realtime Debug Protal/Realtime Debug Protal-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Realtime_Debug_Protal-azclrpmxmylddcddkgqqlwlxxgcg/Build/Products/Debug-iphonesimulator",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -536,9 +545,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Realtime Debug Protal/Realtime Debug Protal-Prefix.pch";
 				INFOPLIST_FILE = "Realtime Debug Protal/Realtime Debug Protal-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Realtime_Debug_Protal-azclrpmxmylddcddkgqqlwlxxgcg/Build/Products/Debug-iphonesimulator",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
