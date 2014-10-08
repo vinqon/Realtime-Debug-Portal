@@ -31,6 +31,7 @@
     }
     
     NSMutableArray *list = [[NSMutableArray alloc] init];
+    
     while(list.count < 10000){
         [list addObject:@(22)];
     }
